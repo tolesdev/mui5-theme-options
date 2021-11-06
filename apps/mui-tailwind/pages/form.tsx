@@ -18,7 +18,12 @@ function Form() {
   return (
     <form onSubmit={onSubmit}>
       Email
-      <Input {...register('email')} />
+      <Input
+        {...register('email')}
+        autoFocus
+        className="border-2 rounded-md border-indigo-600"
+        endAdornment={<span className="text-red-400">IMPORTANT</span>}
+      />
       Password
       <Input {...register('password')} />
       Display Name

@@ -2,25 +2,22 @@ import { InputUnstyled, InputUnstyledProps } from '@mui/core';
 import React from 'react';
 import type { PropsWithChildren } from 'react';
 
-const Input = React.forwardRef<HTMLDivElement, InputUnstyledProps>(
-  (props, ref) => {
-    console.log('Incoming Custom Input props:', props);
-    return (
-      <InputUnstyled
-        {...props}
-        components={{
-          // redirect the `ref` to the input for react-hook-form
-          Input: (props) => <StyledInput {...props} ref={ref} />,
-          Root: InputContainer,
-        }}
-      />
-    );
-  }
+const Input = React.forwardRef<HTMLInputElement, InputUnstyledProps>(
+  (props, ref) => (
+    <InputUnstyled
+      ref={ref}
+      {...props}
+      components={{
+        Input: TailwindInput,
+        Root: InputRoot,
+      }}
+    />
+  )
 );
 
 Input.displayName = 'Input';
 
-const StyledInput = React.forwardRef<
+const TailwindInput = React.forwardRef<
   HTMLInputElement,
   JSX.IntrinsicElements['input'] & {
     ownerState: Record<string, unknown>;
@@ -30,27 +27,36 @@ const StyledInput = React.forwardRef<
   // at the very least it needs to be stripped so not to be injected into the DOM
   // it could also be leveraged for additional stylistic/logical choices
   const { ownerState, ...rest } = props;
-  // console.log('ownerState', ownerState);
-  return <input {...rest} ref={ref} className="border-2 border-indigo-600" />;
+
+  return (
+    <input
+      {...rest}
+      ref={ref}
+      className="border-2 rounded-md border-indigo-600"
+    />
+  );
 });
 
-StyledInput.displayName = 'StyledInput';
+TailwindInput.displayName = 'StyledInput';
 
-const InputContainer = React.forwardRef<
+const InputRoot = React.forwardRef<
   HTMLDivElement,
-  PropsWithChildren<{
-    ownerState: Record<string, unknown>;
-  }>
+  PropsWithChildren<
+    JSX.IntrinsicElements['input'] & {
+      ownerState: Record<string, unknown>;
+    }
+  >
 >((props, ref) => {
-  const { ownerState, children, ...rest } = props;
-  // console.log('ownerState', ownerState);
+  // strip ownerState, and className to remove Mui classes
+  const { ownerState, children, className, ...rest } = props;
+
   return (
-    <div ref={ref} {...rest}>
+    <div {...rest} ref={ref}>
       {children}
     </div>
   );
 });
 
-InputContainer.displayName = 'InputContainer';
+InputRoot.displayName = 'InputContainer';
 
 export default Input;
