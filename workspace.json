@@ -1,8 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "mui-styled-system": "apps/mui-styled-system",
-    "mui-system": "apps/mui-system",
-    "mui-tailwind": "apps/mui-tailwind"
+    "mui-tailwind": "apps/mui-tailwind",
+    "tailwind-middleware": "apps/tailwind-middleware"
   }
 }

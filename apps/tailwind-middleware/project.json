@@ -1,6 +1,6 @@
 {
-  "root": "apps/mui-styled-system",
-  "sourceRoot": "apps/mui-styled-system",
+  "root": "apps/tailwind-middleware",
+  "sourceRoot": "apps/tailwind-middleware",
   "projectType": "application",
   "targets": {
     "build": {
@@ -8,8 +8,8 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/mui-styled-system",
-        "outputPath": "dist/apps/mui-styled-system"
+        "root": "apps/tailwind-middleware",
+        "outputPath": "dist/apps/tailwind-middleware"
       },
       "configurations": {
         "production": {}
@@ -18,12 +18,12 @@
     "serve": {
       "executor": "@nrwl/next:server",
       "options": {
-        "buildTarget": "mui-styled-system:build",
+        "buildTarget": "tailwind-middleware:build",
         "dev": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "mui-styled-system:build:production",
+          "buildTarget": "tailwind-middleware:build:production",
           "dev": false
         }
       }
@@ -31,14 +31,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "mui-styled-system:build:production"
+        "buildTarget": "tailwind-middleware:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/mui-styled-system"],
+      "outputs": ["coverage/apps/tailwind-middleware"],
       "options": {
-        "jestConfig": "apps/mui-styled-system/jest.config.js",
+        "jestConfig": "apps/tailwind-middleware/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -46,7 +46,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/mui-styled-system/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/tailwind-middleware/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
